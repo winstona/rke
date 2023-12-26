@@ -360,6 +360,13 @@ func isControlPlaneHostUpgradable(ctx context.Context, host *hosts.Host, process
 			return true, nil
 		}
 	}
+	for _, v := range processMap[SchedulerContainerName].Command {
+		if strings.HasPrefix(v, "--config=") {
+			logrus.Infof("[%s] Host %v is upgradable because kube scheduler config file exists in param", ControlRole, host.HostnameOverride)
+			return true, nil
+		}
+	}
+
 	logrus.Debugf("[%s] Host %v is not upgradable", ControlRole, host.HostnameOverride)
 	return false, nil
 }
