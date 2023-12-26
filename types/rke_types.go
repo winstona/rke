@@ -361,6 +361,8 @@ type KubeproxyService struct {
 type SchedulerService struct {
 	// Base service properties
 	BaseService `yaml:",inline" json:",inline"`
+	// Config override
+	Config string `yaml:"config" json:"config,omitempty"`
 }
 
 type BaseService struct {

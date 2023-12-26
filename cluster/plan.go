@@ -914,6 +914,10 @@ func (c *Cluster) BuildSchedulerProcess(host *hosts.Host, serviceOptions v3.Kube
 		CommandArrayArgs[arg] = value
 	}
 
+	if c.Services.Scheduler.Config != "" {
+		CommandArgs["config"] = DefaultKubeSchedulerConfigFileValue
+	}
+
 	Command = appendArgs(Command, CommandArgs)
 	Command = appendArrayArgs(Command, CommandArrayArgs)
 

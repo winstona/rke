@@ -316,6 +316,15 @@ func (c *Cluster) SetUpHosts(ctx context.Context, flags ExternalFlags) error {
 				log.Infof(ctx, "[%s] Successfully deployed audit policy file to Cluster control nodes", DefaultKubeAPIArgAuditPolicyFileValue)
 			}
 		}
+
+		if c.Services.Scheduler.Config != "" {
+			controlPlaneHosts := hosts.GetUniqueHostList(nil, c.ControlPlaneHosts, nil)
+
+			if err := deployFile(ctx, controlPlaneHosts, c.SystemImages.Alpine, c.PrivateRegistriesMap, DefaultKubeSchedulerConfigFileValue, c.Services.Scheduler.Config, c.Version); err != nil {
+				return err
+			}
+			log.Infof(ctx, "[%s] Successfully deployed kube-scheduler config file to Cluster control nodes", DefaultKubeSchedulerConfigFileValue)
+		}
 	}
 	return nil
 }

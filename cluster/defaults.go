@@ -162,6 +162,8 @@ const (
 	DefaultKubeAPIArgAuditLogPathValue    = "/var/log/kube-audit/audit-log.json"
 	DefaultKubeAPIArgAuditPolicyFileValue = "/etc/kubernetes/audit-policy.yaml"
 
+	DefaultKubeSchedulerConfigFileValue = "/etc/kubernetes/kube-scheduler-config.yaml"
+
 	DefaultMaxUnavailableWorker       = "10%"
 	DefaultMaxUnavailableControlplane = "1"
 	DefaultNodeDrainTimeout           = 120
